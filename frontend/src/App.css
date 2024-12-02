@@ -1,0 +1,64 @@
+.customShadow{
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.userTable {
+    @apply bg-white
+}
+
+.userTable th{
+    @apply border text-base font-medium
+}
+
+.userTable td{
+    @apply border text-base text-center 
+}
+
+.placeCloseUploadProduct{
+    padding-left: 610px;
+}
+
+.placeCloseChangeUserRole{
+    padding-left: 325px;
+}
+
+.placeCloseProductFullScreen{
+    width: fit-content;
+    margin-left: auto;
+    padding-right:24px;
+    font-size: large;
+}
+
+/* scrollbar hidden   =>   scrollbar-none */
+.scrollbar-none::-webkit-scrollbar{
+    display: none;
+
+}
+
+/* no hover effect   =>    no-hover */
+.no-hover {
+    pointer-events: none;
+  }
+
+
+  /* hover underline effect   =>   hov_des */
+.hov_des {    
+    position: relative;
+}
+
+.hov_des::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: red;
+    transform: scaleX(0);
+    transition: 0.5s;
+}
+
+.hov_des:hover::after {
+    transform: scaleX(1);
+
+}
