@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
 import ROLE from "../common/role";
 import Context from "../context";
+import logo from "../assest/logo.png";
 
 const Header = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -58,7 +59,7 @@ const Header = () => {
         <div className="">
           <Link to={"/"}>
             {/* <Logo w={90} h={50} /> */}
-            <img src="../assest/logo.png" alt="logo" className="bg-red-600"/>
+            <img src={logo} alt="logo" className="h-12 w-auto" />
           </Link>
         </div>
 
