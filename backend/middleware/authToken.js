@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+const { jwtVerify } = require('jose')
 
 async function authToken(req, res, next) {
   try {
@@ -13,18 +13,16 @@ async function authToken(req, res, next) {
         })
     }
 
-    jwt.verify(token, process.env.TOKEN_SECRET_KEY, function(err, decoded) {
-        console.log(err)
-
-        if(err){
-            console.log("Authentication error", err)
-        }
-
-        req.userId = decoded?._id
-
-        next()
-    });
-
+    const secret = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY)
+    
+    try {
+      const { payload } = await jwtVerify(token, secret)
+      req.userId = payload._id
+      next()
+    } catch (err) {
+      console.log("Authentication error", err)
+      next()
+    }
 
   } catch (err) {
     res.status(400).json({

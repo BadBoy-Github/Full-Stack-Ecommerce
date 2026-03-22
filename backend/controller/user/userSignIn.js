@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const userModel = require('../../models/userModel');
-const jwt = require('jsonwebtoken');
+const { SignJWT } = require('jose');
 
 async function userSignInController(req, res) {
   try {
@@ -28,7 +28,12 @@ async function userSignInController(req, res) {
         _id: user._id,
         email: user.email,
       }
-      const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
+
+      const secret = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY)
+      const token = await new SignJWT(tokenData)
+        .setProtectedHeader({ alg: 'HS256' })
+        .setExpirationTime('8h')
+        .sign(secret)
 
       const tokenOption = {
         httpOnly: true,
@@ -45,9 +50,6 @@ async function userSignInController(req, res) {
     } else {
       throw new Error("Incorrect Password!")
     }
-
-
-
 
   } catch (err) {
     res.json({
