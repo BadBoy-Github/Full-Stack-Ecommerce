@@ -44,5 +44,13 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.15"
+  },
+  "vercel": {
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build"
+      }
+    ]
   }
 }

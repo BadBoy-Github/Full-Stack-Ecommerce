@@ -12,16 +12,22 @@ app.use(cors({
     credentials: true,
 }))
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use("/api", router)
 
-const PORT = 8080 || process.env.PORT
+const PORT = process.env.PORT || 8080
 
-
-connectDB().then(()=>{
-    app.listen(PORT,()=>{
-        console.log("Connected to DB")
-        console.log("Server is running")
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+    connectDB().then(() => {
+        app.listen(PORT, () => {
+            console.log("Connected to DB")
+            console.log("Server is running")
+        })
     })
-})
+}
+
+// For Vercel serverless
+module.exports = app
