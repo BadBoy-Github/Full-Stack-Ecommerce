@@ -1,4 +1,5 @@
-const backendDomain = process.env.REACT_APP_BACKEND_URL
+// Use relative URLs - Vercel will route /api/* to backend
+const backendDomain = ''
 
 const SummaryApi = {
     signUp: {
@@ -81,13 +82,13 @@ const SummaryApi = {
         url: `${backendDomain}/api/checkout`,
         method: "post",
     },
-    getOrder : {
-        url : `${backendDomain}/api/order-list`,
-        method : "get",
+    getOrder: {
+        url: `${backendDomain}/api/order-list`,
+        method: "get",
     },
-    allOrder : {
-        url : `${backendDomain}/api/all-order`,
-        method : "get",
+    allOrder: {
+        url: `${backendDomain}/api/all-order`,
+        method: "get",
     }
 }
 

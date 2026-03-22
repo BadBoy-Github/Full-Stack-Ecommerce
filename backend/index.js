@@ -7,8 +7,18 @@ const router = require('./routes')
 
 
 const app = express()
+
+// Get frontend URL - support both local and production
+const frontendUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : process.env.FRONTEND_URL || 'http://localhost:3000'
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [
+        frontendUrl,
+        'http://localhost:3000',
+        'https://*.vercel.app'
+    ],
     credentials: true,
 }))
 app.use(express.json())
