@@ -45,9 +45,9 @@ const Header = () => {
     const { value } = e.target
     setSearch(value)
 
-    if(value){
+    if (value) {
       navigate(`/search?q=${value}`)
-    }else{
+    } else {
       navigate(`/search`)
     }
   }
@@ -57,7 +57,8 @@ const Header = () => {
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className="">
           <Link to={"/"}>
-            <Logo w={90} h={50} />
+            {/* <Logo w={90} h={50} /> */}
+            <img src="../assest/logo.png" alt="logo" className="bg-red-600"/>
           </Link>
         </div>
 
@@ -108,8 +109,8 @@ const Header = () => {
                     )
                   }
                   <Link to={"/order"} className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2 rounded"
-                  onClick={() => setMenuDisplay(preve => !preve)}>
-                  Order Page</Link>
+                    onClick={() => setMenuDisplay(preve => !preve)}>
+                    Order Page</Link>
                 </nav>
               </div>
             )}
