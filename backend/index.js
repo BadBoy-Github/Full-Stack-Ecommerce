@@ -13,12 +13,16 @@ const frontendUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : process.env.FRONTEND_URL || 'http://localhost:3000'
 
+// Allow specific frontend domains for CORS
+const allowedOrigins = [
+    frontendUrl,
+    'http://localhost:3000',
+    'https://full-stack-ecommerce-h47u.vercel.app', // User's frontend
+    'https://*.vercel.app'
+].filter(Boolean)
+
 app.use(cors({
-    origin: [
-        frontendUrl,
-        'http://localhost:3000',
-        'https://*.vercel.app'
-    ],
+    origin: allowedOrigins,
     credentials: true,
 }))
 app.use(express.json())
