@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
     "@stripe/stripe-js": "^5.2.0",

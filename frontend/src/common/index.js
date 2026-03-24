@@ -1,5 +1,6 @@
-// Use relative URLs - Vercel will route /api/* to backend
-const backendDomain = ''
+// For local development, use http://localhost:8080
+// For production on Vercel, set this to your Vercel backend URL or leave empty for relative URLs
+const backendDomain = "http://localhost:8080"
 
 const SummaryApi = {
     signUp: {

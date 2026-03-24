@@ -18,12 +18,12 @@ const VerticalCardProduct = ({ category, heading }) => {
 
     const { fetchUserAddToCart } = useContext(Context)
 
-    const handleAddToCart = async(e,id)=>{
+    const handleAddToCart = async (e, id) => {
         await addToCart(e, id)
         fetchUserAddToCart()
 
     }
-    
+
 
     const fetchData = async () => {
         setLoading(true)
@@ -69,7 +69,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                     loading ? (
                         loadingList.map((product, index) => {
                             return (
-                                <div className='w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white rounded-xl shadow-md'>
+                                <div key={index} className='w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white rounded-xl shadow-md'>
                                     <div className='bg-slate-200 h-52 p-4 min-w-[120px] md:min-w-[145px] rounded-xl flex justify-center items-center animate-pulse'>
                                     </div>
 
@@ -93,7 +93,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                     ) : (
                         data.map((product, index) => {
                             return (
-                                <Link to={"product/"+product?._id} className='w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white rounded-xl shadow-md'>
+                                <Link key={product._id} to={"product/" + product?._id} className='w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white rounded-xl shadow-md'>
                                     <div className='bg-slate-200 h-52 p-4 min-w-[120px] md:min-w-[145px] rounded-xl flex justify-center items-center'>
                                         <img src={product.productImage[0]} alt='' className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply' />
                                     </div>
@@ -106,7 +106,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                                             <p className='text-slate-600 line-through'>{displayINRCurrency(product?.price)}</p>
                                         </div>
 
-                                        <button className='bg-red-600 hover:bg-red-800 rounded-full text-base text-white px-3 py-0.5' onClick={(e)=>handleAddToCart(e, product?._id)}>Add to Cart</button>
+                                        <button className='bg-red-600 hover:bg-red-800 rounded-full text-base text-white px-3 py-0.5' onClick={(e) => handleAddToCart(e, product?._id)}>Add to Cart</button>
 
                                     </div>
 
