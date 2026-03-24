@@ -1,6 +1,7 @@
 // For local development, use http://localhost:8080
-// For production on Vercel, set this to your Vercel backend URL or leave empty for relative URLs
-const backendDomain = "http://localhost:8080"
+// For production on Vercel, set via REACT_APP_BACKEND_URL env variable
+// Or leave empty if frontend and backend are on same domain (monolithic Vercel deployment)
+const backendDomain = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"
 
 const SummaryApi = {
     signUp: {

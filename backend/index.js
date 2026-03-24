@@ -25,19 +25,43 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+// For Vercel serverless - connect to DB on each request
+// Must be before routes to ensure DB is connected
+app.use(async (req, res, next) => {
+    if (!global._mongoConnected) {
+        try {
+            await connectDB()
+            global._mongoConnected = true
+        } catch (err) {
+            console.log("DB connection error:", err.message)
+        }
+    }
+    next()
+})
+
 app.use("/api", router)
 
 const PORT = process.env.PORT || 8080
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-    connectDB().then(() => {
+// Connect to database and start server
+async function startServer() {
+    try {
+        await connectDB()
+        console.log("Connected to DB")
+    } catch (err) {
+        console.log("DB connection error:", err.message)
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
         app.listen(PORT, () => {
-            console.log("Connected to DB")
             console.log("Server is running")
         })
-    })
+    }
 }
 
-// For Vercel serverless
+// For local development - connect to DB and start server
+if (process.env.NODE_ENV !== 'production') {
+    startServer()
+}
+
 module.exports = app
